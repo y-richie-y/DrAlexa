@@ -1,2 +1,2 @@
-# DroitChallenge
-Using NLP (Natural Language Processing) to analyse legal texts.
+# DrAlexa
+Alexa application that helps you fetch medical records.
