@@ -77,6 +77,7 @@ ShowFamilyHistoryIntent pull up her family history
 ShowFamilyHistoryIntent pull up his family history
 ShowFamilyHistoryIntent show me family history
 
+<<<<<<< HEAD
 ShowImmunisationIntent pull up her immunisation
 ShowImmunisationIntent pull up his immunisation
 ShowImmunisationIntent pull up her immunisation history
@@ -85,6 +86,15 @@ ShowImmunisationIntent show me his immunisation history
 ShowImmunisationIntent show me her immunisation history
 ShowImmunisationIntent what is his immunisation history
 ShowImmunisationIntent what is her immunisation history
+ShowRecentDiagnosticReportIntent
+	show me his recent diagnosis
+	show me her recent diagnosis
+	show me comments from our last session
+	show me relevant diagnosis
+	show me recent diagnosis
+	show me diagnosis report
+	show me his diagnosis report
+	shoe me her diagnosis repor
 
 ShowRecentDiagnosticReportIntent show me his recent diagnosis
 ShowRecentDiagnosticReportIntent show me her recent diagnosis
