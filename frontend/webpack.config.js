@@ -1,7 +1,6 @@
 /* eslint-disable */
-import webpack from 'webpack';
-import path from 'path';
-import WorkboxBuildWebpackPlugin from 'workbox-webpack-plugin';
+const webpack=require('webpack');
+const path=require('path');
 
 const BUILD_DIR = path.resolve(__dirname, 'bin');
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -34,8 +33,8 @@ const generateBabelEnvLoader = (browserlist) => {
   };
 };
 
-const config = {
-  entry: 'app',
+module.exports = {
+  entry: path.resolve(SRC_DIR, '/app.jsx'),
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
