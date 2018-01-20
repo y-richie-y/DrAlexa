@@ -34,7 +34,7 @@ const generateBabelEnvLoader = (browserlist) => {
 };
 
 module.exports = {
-  entry: path.resolve(SRC_DIR, '/app.jsx'),
+  entry: path.resolve(SRC_DIR, 'app.jsx'),
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
