@@ -6,6 +6,9 @@ module.exports = function(app) {
   app.route('/get/:attr')
     .get(controller.get_attr);
 
+    app.route('/alexa/show/')
+    .post(controller.get_alexa_response);
+
   app.route('/get/history')
     .get(controller.get_history);
 };
