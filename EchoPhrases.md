@@ -100,7 +100,7 @@ ShowRecentDiagnosticReportIntent
 	show me recent diagnosis
 	show me diagnosis report
 	show me his diagnosis report
-	shoe mw her diagnosis report
+	shoe me her diagnosis report
 
 ShowGoalIntent
 	what is the goal for this patient?
