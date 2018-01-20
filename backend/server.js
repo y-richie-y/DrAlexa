@@ -36,7 +36,7 @@ app.use(function(req, res) {
 });
 
 var alexa = require('./alexa.js');
-app.route('/alexa').post(alexa)
+app.post('/alexa', alexa)
 
 app.listen(port);
 console.log('RESTful API server started on: ' + port);
