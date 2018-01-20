@@ -31,8 +31,13 @@ bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(express.static('static'));
+app.get('/', (req, res) => {
+  res.sendFile("./static/index.html");
+});
+
 var alexa = require('./alexa.js');
-app.post('/alexa', alexa)
+app.post('/alexa', alexa);
 
 app.listen(port);
 console.log('RESTful API server started on: ' + port);
