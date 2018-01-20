@@ -4,8 +4,4 @@ cd "$(dirname "$0")"
 git pull
 cd frontend
 npm install
-npm build-webpack
-#...build webpack...
- 
-cd ../backend
-npm start
+node node_modules/webpack/bin/webpack.js --config webpack.config.js
