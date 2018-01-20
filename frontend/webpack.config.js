@@ -26,7 +26,6 @@ const generateBabelEnvLoader = (browserlist) => {
       ],
       plugins: [
         'transform-imports',
-        'syntax-dynamic-import',
         'transform-object-rest-spread',
         'transform-es2015-destructuring'],
     },
