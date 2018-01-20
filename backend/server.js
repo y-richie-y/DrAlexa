@@ -42,3 +42,26 @@ app.use(function(req, res) {
 app.listen(port);
 console.log('RESTful API server started on: ' + port);
 
+// websocket
+
+const WebSocket = require('ws');
+
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+  ws.send('something');
+});
+
+const ws = new WebSocket('ws://localhost:8080');
+
+ws.on('open', function open() {
+  ws.send('something');
+});
+
+ws.on('message', function incoming(data) {
+  console.log(data);
+});
