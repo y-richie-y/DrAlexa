@@ -1,16 +1,4 @@
-'use strict';
-
-// name, prescription, allergy, condition, insurance, family history
-
-exports.get_attr = function(req, res) {
-    res.send(req.params);
-}
-
-exports.get_history = function(req, res) {
-    res.send(req.query);
-}
-
-exports.get_alexa_response = (req, res) => {
+module.exports = function(req, res) {
     let patient = req.body.patient;
     let organisation = req.body.organisation;
     let category = req.body.category;
@@ -30,5 +18,4 @@ exports.get_alexa_response = (req, res) => {
     }
 
     res.send(req.body);
-
-}
+};

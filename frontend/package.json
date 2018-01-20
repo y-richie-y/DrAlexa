@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "node node_modules/webpack/bin/webpack.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
