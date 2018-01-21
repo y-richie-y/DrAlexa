@@ -1,7 +1,7 @@
 const mongodb = require('mongodb')
 const _ = require('lodash')
 
-module.exports = async function query(patientFirstName, patientLastName, category, meta) {
+module.exports = async function query(patientFirstName, patientLastName, category, meta = {}) {
     if (!patientFirstName)
         return {'error': {'required': 'patientFirstName'}};
     if (!patientLastName)
