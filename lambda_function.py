@@ -7,8 +7,11 @@ For additional samples, visit the Alexa Skills Kit Getting Started guide at
 http://amzn.to/1LGWsLG
 """
 from __future__ import print_function
-# import requests
-
+from urllib2 import urlopen
+from urllib import urlencode
+import json
+import re
+import random
 
 # --------------- Helpers that build all of the responses ----------------------
 
@@ -72,10 +75,6 @@ def handle_session_end_request():
         card_title, speech_output, None, should_end_session))
 
 
-def create_favorite_color_attributes(favorite_color):
-    return {"favoriteColor": favorite_color}
-
-
 def set_color_in_session(intent, session):
     """ Sets the color in the session and prepares the speech to reply to the
     user.
@@ -135,6 +134,78 @@ def get_allergies(intent,session):
     return build_response(session_attributes, build_speechlet_response(
         intent['name'], speech_output, reprompt_text, should_end_session))
 
+def request_server(first_name, last_name, category, meta={}):
+    data = {'firstName': first_name, 'lastName': last_name, 'category': category, 'meta': meta}
+    return json.loads(urlopen("http://ec2-34-242-70-107.eu-west-1.compute.amazonaws.com:3006/alexa/voice",
+        data = urlencode(data)).read())
+    
+def name_is_here_intent(intent, session):
+    session_attributes = {}
+    
+    try:
+        session_attributes["firstName"] = intent['slots']['firstName']['value'].lower()
+        session_attributes["lastName"] = intent['slots']['lastName']['value'].lower()
+    except:
+        speech_output = "I could not understand the full name."
+        
+        return build_response(session_attributes, build_speechlet_response(
+            intent['name'], speech_output, reprompt_text=None, should_end_session=False))
+    
+    response = request_server(session_attributes["firstName"], session_attributes["lastName"], 'TEST_NAME')
+    if ("error" in response):
+        speech_output = str(response)
+    else:
+        speech_output = "Ok."
+    
+    return build_response(session_attributes, build_speechlet_response(
+        intent['name'], speech_output, reprompt_text=None, should_end_session=False))
+
+category_mapping = {
+    'prescriptions': 'PRESCRIPTIONS',
+    'prescription': 'PRESCRIPTIONS',
+    'allergy': 'ALLERGIES',
+    'allergies': 'ALLERGIES',
+    'conditions': 'CONDITIONS',
+    'condition': 'CONDITIONS',
+    'medical': 'CONDITIONS',
+    'past conditions': 'PAST_CONDITIONS',
+    'past condition': 'PAST_CONDITIONS',
+    'goals': 'GOALS',
+    'goal': 'GOALS'
+}
+def information_intent(intent, session):
+    session_attributes = session['attributes']
+    try:
+        firstName = session_attributes["firstName"]
+        lastName = session_attributes["lastName"]
+    except: 
+        return build_response(session_attributes, build_speechlet_response(
+            intent['name'], output = "Which patient is here?", reprompt_text=None, should_end_session=False))
+    try:
+        category = intent['slots']['category']['value'].strip(".")
+        category = category_mapping[category.lower()]
+    except:
+        return build_response(session_attributes, build_speechlet_response(
+            intent['name'], output = "I don't know.", reprompt_text=None, should_end_session=False))
+    
+    response = request_server(session_attributes["firstName"], session_attributes["lastName"], category)
+    
+    if "error" in response:
+        return build_response(session_attributes, build_speechlet_response(
+            intent['name'], output = "Something went wrong.", reprompt_text=None, should_end_session=False))
+    category_output = category.lower().replace('_', ' ')
+    response = [re.sub(r'\s\(.*\)', '', item).replace('<', 'smaller than').replace('>', 'larger than') for item in response]
+    if len(response) == 0:
+        output = 'I found no %s' % category_output
+    else:
+        if random.random() > 0.5:
+            output = 'I found the following %s: %s' % (category_output, ', '.join(response))
+        else:
+            output = 'Here are the %s: %s' % (category_output, ', '.join(response))
+    
+    return build_response(session_attributes, build_speechlet_response(
+            intent['name'], output, reprompt_text=None, should_end_session=False))
+
 # --------------- Events ------------------
 
 def on_session_started(session_started_request, session):
@@ -169,20 +240,16 @@ def on_intent(intent_request, session):
     # raise ValueError(intent_name)
 
     # Dispatch to your skill's intent handlers
-    if intent_name == "MyColorIsIntent":
-        return set_color_in_session(intent, session)
-    elif intent_name == "WhatsMyColorIntent":
-        return get_color_from_session(intent, session)
-    elif intent_name == "WhatAllergies":
-        return get_allergies(intent,session)
-    elif intent_name == "ShowNameIntent":
-        return get_allergies(intent,session)
+    if intent_name == "NameIsHereIntent":
+        return name_is_here_intent(intent,session)
+    elif intent_name == "InformationIntent":
+        return information_intent(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":
         return handle_session_end_request()
     else:
-        raise ValueError("Invalid intent")
+        raise ValueError("Invalid intent: %s" % intent_name)
 
 
 def on_session_ended(session_ended_request, session):
