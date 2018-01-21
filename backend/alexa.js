@@ -76,6 +76,7 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
         }
         case 'TEST_NAME': {
             returnObj = {};
+            break;
         }
         default: {
             returnObj = {'error': {'not found': 'category'}};
