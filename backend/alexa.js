@@ -74,8 +74,11 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
             returnObj = _.map(arr, element => element.resource.code.text);
             break;
         }
+        case 'TEST-NAME': {
+            returnObj = {};
+        }
         default: {
-            returnObj = {'error': {'not found': 'category'}}
+            returnObj = {'error': {'not found': 'category'}};
         }
     }
             
