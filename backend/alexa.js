@@ -34,10 +34,11 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
             const arr = await lib.find({
                 'resource.resourceType': 'AllergyIntolerance',
                 'resource.patient.reference': patient.fullUrl,
+                'resource.verificationStatus': confirmed,
                 ...criticality
             }).toArray();
             returnObj = _.map(arr, element => 
-                element.resource.verificationStatus + ' ' + element.resource.code.coding[0].display);
+                element.resource.code.coding[0].display);
             break;
         }
         case 'CONDITIONS': {
