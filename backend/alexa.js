@@ -6,7 +6,7 @@ module.exports = async function query(patientFirstName, patientLastName, categor
         return {'error': {'required': 'patientFirstName'}};
     if (!patientLastName)
         return {'error': {'required': 'patientLastName'}};
-    if (category)
+    if (!category)
         return {'error': {'required': 'category'}};
 
     let returnObj = null;
@@ -14,8 +14,8 @@ module.exports = async function query(patientFirstName, patientLastName, categor
     const lib = db.db('db').collection('fhir');
     const patient = await lib.findOne({
         'resource.resourceType': 'Patient', 
-        'resource.name.family': patientLastName, 
-        'resource.name.given.0': patientFirstName
+        'resource.firstName': patientFirstName,
+        'resource.lastName': patientLastName,
     });
     
     switch (category) {
