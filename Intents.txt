@@ -1,0 +1,29 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "firstName",
+          "type": "LIST_OF_FIRST_NAMES"
+        },
+        {
+          "name": "lastName",
+          "type": "LIST_OF_SECOND_NAMES"
+        }
+      ],
+      "intent": "NameIsHereIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "category",
+          "type": "LIST_OF_CATEGORIES"
+        }
+      ],
+      "intent": "InformationIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    }
+  ]
+}

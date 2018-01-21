@@ -1,0 +1,9 @@
+NameIsHereIntent {firstName} {lastName} is hereNameIsHereIntent {firstName} {lastName} is here
+NameIsHereIntent {firstName} {lastName} has arrived
+InformationIntent show me {category}
+InformationIntent show me {category} history
+InformationIntent what is her {category}
+InformationIntent what is his {category}
+InformationIntent tell me about her {category}
+InformationIntent tell me about his {category}
+InformationIntent any {category}
