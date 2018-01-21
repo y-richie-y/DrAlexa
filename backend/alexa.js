@@ -28,12 +28,14 @@ module.exports = async function query(patientFirstName, patientLastName, categor
             break;
         }
         case 'ALLERGIES': {
+            const criticality = meta.criticality ? {'resource.criticality': meta.criticality} : {};
             const arr = await lib.find({
                 'resource.resourceType': 'AllergyIntolerance',
-                'resource.patient.reference': patient.fullUrl
+                'resource.patient.reference': patient.fullUrl,
+                ...criticality
             }).toArray();
             returnObj = _.map(arr, element => 
-                element.resource.criticality + '-criticality, ' + element.resource.verificationStatus + ' ' + element.resource.code.coding[0].display);
+                element.resource.verificationStatus + ' ' + element.resource.code.coding[0].display);
             break;
         }
         case 'CONDITIONS': {
