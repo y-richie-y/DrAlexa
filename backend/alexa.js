@@ -24,7 +24,7 @@ module.exports = async function query(patientFirstName, patientLastName, categor
                 'resource.resourceType': 'MedicationRequest',
                 'resource.subject.reference': patient.fullUrl,
             }).toArray();
-            returnObj = _.map(arr, element => element.resource.medicationCodeableConcept.coding.text);
+            returnObj = _.map(arr, element => element.resource.medicationCodeableConcept.text);
             break;
         }
         case 'ALLERGIES': {
