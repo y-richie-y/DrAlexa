@@ -18,7 +18,7 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
         'resource.lastName': lastName,
     });
 
-    if (!patient):
+    if (!patient)
         return {'error': {'not found': 'patient'}}
     
     switch (category) {
