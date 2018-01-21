@@ -65,7 +65,7 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
             returnObj = _.map(realGoals, element => element.resource.description.text);
             break;
         }
-        case 'PAST-CONDITIONS': {
+        case 'PAST_CONDITIONS': {
             const arr = await lib.find({
                 'resource.resourceType': 'Condition',
                 'resource.clinicalStatus': 'resolved',
@@ -74,7 +74,7 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
             returnObj = _.map(arr, element => element.resource.code.text);
             break;
         }
-        case 'TEST-NAME': {
+        case 'TEST_NAME': {
             returnObj = {};
         }
         default: {
