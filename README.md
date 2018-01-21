@@ -1,6 +1,6 @@
 # DrAlexa
 
-![alt text](https://www.timeslive.co.za/news/sci-tech/2017-06-19-doctor-robot-will-see-you-now/ )
+![alt text](https://lh3.googleusercontent.com/CklzbwUgT_PKx28WWH7t0OhxDAwDlPBCuFZMUOapVmSWyG4HCmqypS1NHgVNwrTDeWeS_AttuU9H3nP9qCrAyw=s750)
 
 ## Inspiration
 
