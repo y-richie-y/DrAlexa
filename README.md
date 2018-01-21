@@ -1,5 +1,7 @@
 # DrAlexa
 
+![alt text](https://www.timeslive.co.za/news/sci-tech/2017-06-19-doctor-robot-will-see-you-now/ )
+
 ## Inspiration
 
 Visiting the Doctor makes us uneasy -- it's the clunk of long medical forms, shifting in your seats trying to recall the last time you visited, the long silence when the doctor pulls out your record -- or at least tries to find it for five long minutes before giving up. We wanted to make hospital visits more organic, inviting and natural. Imagine a better conversation between you and the doctor -- no awkward pauses, no fudging facts about your medication, no leaving out stuff you mentioned last session -- because Alexa now remembers everything for you, and participates in the conversation upon request.
