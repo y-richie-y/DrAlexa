@@ -33,7 +33,7 @@ module.exports = async function query(patientFirstName, patientLastName, categor
                 'resource.patient.reference': patient.fullUrl
             }).toArray();
             returnObj = _.map(arr, element => 
-                element.resource.code.criticality + '-criticality, ' + element.resource.code.verificationStatus + ' ' + element.resource.code.coding[0].display);
+                element.resource.criticality + '-criticality, ' + element.resource.verificationStatus + ' ' + element.resource.code.coding[0].display);
             break;
         }
         case 'CONDITIONS': {
@@ -55,7 +55,9 @@ module.exports = async function query(patientFirstName, patientLastName, categor
                 'resource.resourceType': 'Goal',
                 'resource.addresses.reference': condition.fullUrl
             })));
-            returnObj = _.map(goals, element => element.resource.description.text);
+            const realGoals = _.filter(goals, element => element);
+            
+            returnObj = _.map(realGoals, element => element.resource.description.text);
             break;
         }
         case 'PAST-CONDITIONS': {
