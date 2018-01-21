@@ -37,7 +37,14 @@ app.get('/', (req, res) => {
 });
 
 var alexa = require('./alexa.js');
-app.post('/alexa', alexa);
+app.post('/alexa/voice', (req, res) => {
+  let patientFirstName = req.body.patientFirstName;
+  let patientLastName = req.body.patientLastName;
+  let category = req.body.category;
+  let meta = req.body.meta;
+    
+  res.send(alexa(patientFirstName, patientLastName, category, meta));
+});
 
 app.listen(port);
 console.log('RESTful API server started on: ' + port);
