@@ -43,7 +43,7 @@ app.post('/alexa/voice', (req, res) => {
   let category = req.body.category;
   let meta = req.body.meta;
     
-  res.send(alexa(patientFirstName, patientLastName, category, meta));
+  res.send(alexa(firstName, lastName, category, meta));
 });
 
 app.listen(port);
