@@ -34,7 +34,7 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
             const arr = await lib.find({
                 'resource.resourceType': 'AllergyIntolerance',
                 'resource.patient.reference': patient.fullUrl,
-                'resource.verificationStatus': confirmed,
+                'resource.verificationStatus': 'confirmed',
                 ...criticality
             }).toArray();
             returnObj = _.map(arr, element => 
