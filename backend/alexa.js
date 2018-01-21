@@ -42,7 +42,7 @@ module.exports = async function query(patientFirstName, patientLastName, categor
                 'resource.clinicalStatus': 'active',
                 'resource.subject.reference': patient.fullUrl
             }).toArray();
-            returnObj = _.map(arr, element => element.code.text);
+            returnObj = _.map(arr, element => element.resource.code.text);
             break;
         }
         case 'GOALS': {
@@ -55,7 +55,7 @@ module.exports = async function query(patientFirstName, patientLastName, categor
                 'resource.resourceType': 'Goal',
                 'resource.addresses.reference': condition.fullUrl
             })));
-            returnObj = _.map(goals, element => element.description.text);
+            returnObj = _.map(goals, element => element.resource.description.text);
             break;
         }
         case 'PAST-CONDITIONS': {
@@ -64,7 +64,7 @@ module.exports = async function query(patientFirstName, patientLastName, categor
                 'resource.clinicalStatus': 'resolved',
                 'resource.subject.reference': patient.fullUrl
             }).toArray();
-            returnObj = _.map(arr, element => element.code.text);
+            returnObj = _.map(arr, element => element.resource.code.text);
             break;
         }
     }
