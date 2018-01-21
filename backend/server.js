@@ -38,8 +38,8 @@ app.get('/', (req, res) => {
 
 var alexa = require('./alexa.js');
 app.post('/alexa/voice', (req, res) => {
-  let patientFirstName = req.body.patientFirstName;
-  let patientLastName = req.body.patientLastName;
+  let firstName = req.body.firstName;
+  let lastName = req.body.lastName;
   let category = req.body.category;
   let meta = req.body.meta;
     

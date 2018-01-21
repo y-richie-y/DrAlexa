@@ -1,22 +1,25 @@
 const mongodb = require('mongodb')
 const _ = require('lodash')
 
-module.exports = async function query(patientFirstName, patientLastName, category, meta = {}) {
-    if (!patientFirstName)
-        return {'error': {'required': 'patientFirstName'}};
-    if (!patientLastName)
-        return {'error': {'required': 'patientLastName'}};
+module.exports = async function query(firstName, lastName, category, meta = {}) {
+    if (!firstName)
+        return {'error': {'required': 'firstName'}};
+    if (!lastName)
+        return {'error': {'required': 'lastName'}};
     if (!category)
         return {'error': {'required': 'category'}};
 
-    let returnObj = null;
-    const db = await mongodb.MongoClient.connect("mongodb://admin:password@10.0.2.27:27017");
+    let returnObj = {};
+    const db = await mongodb.MongoClient.connect('mongodb://admin:password@10.0.2.27:27017');
     const lib = db.db('db').collection('fhir');
     const patient = await lib.findOne({
         'resource.resourceType': 'Patient', 
-        'resource.firstName': patientFirstName,
-        'resource.lastName': patientLastName,
+        'resource.firstName': firstName,
+        'resource.lastName': lastName,
     });
+
+    if (!patient):
+        return {'error': {'not found': 'patient'}}
     
     switch (category) {
         case 'PRESCRIPTIONS': {
