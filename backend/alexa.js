@@ -19,9 +19,8 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
     });
 
     if (!patient)
-        return {'error': {'not found': 'patient'}}
-    
-    switch (category) {
+        returnObj = {'error': {'not found': 'patient'}}
+    else switch (category) {
         case 'PRESCRIPTIONS': {
             const arr = await lib.find({
                 'resource.resourceType': 'MedicationRequest',
@@ -73,6 +72,9 @@ module.exports = async function query(firstName, lastName, category, meta = {}) 
             }).toArray();
             returnObj = _.map(arr, element => element.resource.code.text);
             break;
+        }
+        default: {
+            returnObj = {'error': {'not found': 'category'}}
         }
     }
             
