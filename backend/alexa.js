@@ -30,7 +30,7 @@ module.exports = async function query(patientFirstName, patientLastName, categor
         case 'ALLERGIES': {
             const arr = await lib.find({
                 'resource.resourceType': 'AllergyIntolerance',
-                'resource.subject.reference': patient.fullUrl
+                'resource.patient.reference': patient.fullUrl
             }).toArray();
             returnObj = _.map(arr, element => 
                 element.resource.code.criticality + '-criticality, ' + element.resource.code.verificationStatus + ' ' + element.resource.code.coding[0].display);
@@ -51,7 +51,7 @@ module.exports = async function query(patientFirstName, patientLastName, categor
                 'resource.clinicalStatus': 'active',
                 'resource.subject.reference': patient.fullUrl
             }).toArray();
-            const goals = await Promise.all(_.map(arr, lib.findOne({
+            const goals = await Promise.all(_.map(arr, condition => lib.findOne({
                 'resource.resourceType': 'Goal',
                 'resource.addresses.reference': condition.fullUrl
             })));
