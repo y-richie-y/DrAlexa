@@ -38,12 +38,8 @@ app.get('/', (req, res) => {
 
 var alexa = require('./alexa.js');
 app.post('/alexa/voice', async (req, res) => {
-  let firstName = req.body.firstName;
-  let lastName = req.body.lastName;
-  let category = req.body.category;
-  let meta = req.body.meta;
-  
-  const response = await alexa(firstName, lastName, category, meta);
+  console.log(req.body);
+  const response = await alexa(req.body.firstName, req.body.lastName, req.body.category, req.body.meta);
   res.send(response);
 });
 
